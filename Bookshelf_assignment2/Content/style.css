@@ -1,0 +1,42 @@
+/**
+ * File name: style.css
+ * Author's name: Daria Davydenko
+ * Student ID: 200335788
+ *
+ * This is a css page with all styles for pages.
+ */
+
+/*Navbar style*/
+.navbar{
+    margin-bottom: 0px!important;
+}
+
+.poster {
+    width: auto;
+    font-family: Arial, sans-serif;
+    font-size: 2.5em;
+    height: 100vh;
+    color: white;
+}
+
+.intro {
+    margin: 0;
+    padding: 2em 5em;
+    background-color: white;
+    width: auto;
+    height: 70vh;
+}
+
+p {
+    font-family: Arial, sans-serif;
+    font-size: 1.5em;
+    word-spacing: 0.2em;
+    line-height: 1.2em;
+    padding: 1em 0 0;
+}
+
+@media only screen and (max-width: 630px) {
+    .intro {
+        padding: 1em;
+    }
+}

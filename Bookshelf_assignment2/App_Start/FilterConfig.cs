@@ -8,6 +8,9 @@ namespace Bookshelf_assignment2
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+
+            // force ssl
+            filters.Add(new RequireHttpsAttribute());
         }
     }
 }

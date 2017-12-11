@@ -51,9 +51,9 @@ namespace Bookshelf_assignment2
                 clientId: ConfigurationManager.AppSettings["MicrosoftClientId"],
                 clientSecret: ConfigurationManager.AppSettings["MicrosoftClientSecret"]);
 
-            app.UseTwitterAuthentication(
-               consumerKey: ConfigurationManager.AppSettings["TwitterConsumerKey"],
-               consumerSecret: ConfigurationManager.AppSettings["TwitterConsumerSecret"]);
+            //app.UseTwitterAuthentication(
+            //   consumerKey: ConfigurationManager.AppSettings["TwitterConsumerKey"],
+            //   consumerSecret: ConfigurationManager.AppSettings["TwitterConsumerSecret"]);
 
             app.UseFacebookAuthentication(
                appId: ConfigurationManager.AppSettings["FacebookAppId"],

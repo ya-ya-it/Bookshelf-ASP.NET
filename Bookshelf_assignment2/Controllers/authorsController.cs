@@ -10,6 +10,7 @@ using Assignment1.Models;
 
 namespace Assignment1.Controllers
 {
+    [Authorize]
     public class authorsController : Controller
     {
         private BookshelfModel db = new BookshelfModel();
@@ -20,6 +21,7 @@ namespace Assignment1.Controllers
             return View(db.authors.ToList());
         }
 
+        [AllowAnonymous]
         // GET: authors/Details/5
         public ActionResult Details(int? id)
         {

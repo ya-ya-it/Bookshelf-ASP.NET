@@ -30,7 +30,7 @@ namespace Assignment1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            book book = db.books.Find(id);
+            Book book = db.books.Find(id);
             if (book == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace Assignment1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "book_id,title,author_id,year_published,summary")] book book)
+        public ActionResult Create([Bind(Include = "book_id,title,author_id,year_published,summary")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +70,7 @@ namespace Assignment1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            book book = db.books.Find(id);
+            Book book = db.books.Find(id);
             if (book == null)
             {
                 return HttpNotFound();
@@ -84,7 +84,7 @@ namespace Assignment1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "book_id,title,author_id,year_published,summary")] book book)
+        public ActionResult Edit([Bind(Include = "book_id,title,author_id,year_published,summary")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -103,7 +103,7 @@ namespace Assignment1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            book book = db.books.Find(id);
+            Book book = db.books.Find(id);
             if (book == null)
             {
                 return HttpNotFound();
@@ -116,7 +116,7 @@ namespace Assignment1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            book book = db.books.Find(id);
+            Book book = db.books.Find(id);
             db.books.Remove(book);
             db.SaveChanges();
             return RedirectToAction("Index");

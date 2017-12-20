@@ -44,7 +44,6 @@ namespace Bookshelf_assignment2.Tests.Controllers
 
             controller = new booksController(mock.Object);
             
-
         }
 
         [TestMethod]
@@ -62,14 +61,34 @@ namespace Bookshelf_assignment2.Tests.Controllers
         [TestMethod]
         public void IndexReturnsBooks()
         {
-            var actual = controller.Index().Model;
+            var actual = (List<book>)controller.Index().Model;
+            CollectionAssert.AreEqual(books, actual);
+        }
+
+        [TestMethod]
+        public void DetailsValidBook()
+        {
+            var actual = (book)controller.Details(1).Model;
+            Assert.AreEqual(books.ToList()[0], actual);
+        }
+
+        [TestMethod]
+        public void DetailsInvalidBook()
+        {
+            var actual = (book)controller.Details(12345).Model;
+            Assert.IsNull(actual);
+        }
+
+        [TestMethod]
+        public void DetailsInvalidNoId()
+        {
+            int? id = null;
+            var actual = controller.Details(id);
+            Assert.AreEqual("Error", actual.ViewName);
         }
 
         public booksControllerTest()
         {
-            //
-            // TODO: Add constructor logic here
-            //
         }
 
         private TestContext testContextInstance;

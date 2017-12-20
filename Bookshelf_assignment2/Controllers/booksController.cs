@@ -37,21 +37,21 @@ namespace Assignment1.Controllers
             return View(books.ToList());
         }
 
-        //[AllowAnonymous]
-        //// GET: books/Details/5
-        //public ActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    book book = db.books.Find(id);
-        //    if (book == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(book);
-        //}
+        [AllowAnonymous]
+        // GET: books/Details/5
+        public ViewResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return View("Error");
+            }
+            book book = db.books.SingleOrDefault(b => b.book_id == id);
+            if (book == null)
+            {
+                return View("Error");
+            }
+            return View(book);
+        }
 
         //// GET: books/Create
         //public ActionResult Create()

@@ -11,7 +11,7 @@ namespace Assignment1.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public author()
         {
-            books = new HashSet<Book>();
+            books = new HashSet<book>();
         }
 
         [Key]
@@ -28,6 +28,6 @@ namespace Assignment1.Models
         public DateTime? date_of_birth { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Book> books { get; set; }
+        public virtual ICollection<book> books { get; set; }
     }
 }

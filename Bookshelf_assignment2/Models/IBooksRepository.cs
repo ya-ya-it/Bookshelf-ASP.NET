@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 
 namespace Bookshelf_assignment2.Models
 {
-    interface IBooksRepository
+    public interface IBooksRepository
     {
-        IQueryable<Book> Books { get; }
+        IQueryable<book> books { get; }
+        IQueryable<author> authors { get; }
 
-        Book Save(Book book);
+        book Save(book book);
+
+        void Delete(book book);
 
     }
 }

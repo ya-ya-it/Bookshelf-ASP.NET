@@ -16,16 +16,17 @@ namespace Bookshelf_assignment2.Models
         //db
         BookshelfModel db = new BookshelfModel();
 
-        public IQueryable<Book> Books { get{ return db.books; } }
+        public IQueryable<book> books { get{ return db.books; } }
 
-        public IQueryable<author> Authors { get { return db.authors; } } 
-        public void Delete(Book book)
+        public IQueryable<author> authors { get { return db.authors; } }
+
+        public void Delete(book book)
         {
             db.books.Remove(book);
             db.SaveChanges();
         }
 
-        public Book Save(Book book)
+        public book Save(book book)
         {
             if (book.book_id == 0)
             {

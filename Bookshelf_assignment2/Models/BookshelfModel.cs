@@ -13,7 +13,7 @@ namespace Assignment1.Models
         }
 
         public virtual DbSet<author> authors { get; set; }
-        public virtual DbSet<Book> books { get; set; }
+        public virtual DbSet<book> books { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -25,11 +25,11 @@ namespace Assignment1.Models
                 .Property(e => e.first_name)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Book>()
+            modelBuilder.Entity<book>()
                 .Property(e => e.title)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Book>()
+            modelBuilder.Entity<book>()
                 .Property(e => e.summary)
                 .IsUnicode(false);
         }

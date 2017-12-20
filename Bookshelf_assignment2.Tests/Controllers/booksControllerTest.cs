@@ -3,6 +3,15 @@ using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+//additioanl references
+using System.Web.Mvc;
+using Bookshelf_assignment2.Controllers;
+using Assignment1.Controllers;
+using Moq;
+using Bookshelf_assignment2.Models;
+using Assignment1.Models;
+using System.Linq;
+
 namespace Bookshelf_assignment2.Tests.Controllers
 {
     /// <summary>
@@ -11,6 +20,51 @@ namespace Bookshelf_assignment2.Tests.Controllers
     [TestClass]
     public class booksControllerTest
     {
+        booksController controller;
+        Mock<IBooksRepository> mock;
+        List<book> books;
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            //Arrange
+            //pass mock data to 2nd controller
+            mock = new Mock<IBooksRepository>();
+
+            //create mock data
+            books = new List<book>
+            {
+                new book {book_id = 1, title = "Book1", author_id = 1, year_published = 1998, summary = "Book1"},
+                new book {book_id = 2, title = "Book2", author_id = 1, year_published = 1999, summary = "Book2"},
+                new book {book_id = 3, title = "Book3", author_id = 1, year_published = 2000, summary = "Book3"}
+            };
+
+            //populate mock data
+            mock.Setup(m => m.books).Returns(books.AsQueryable());
+
+            controller = new booksController(mock.Object);
+            
+
+        }
+
+        [TestMethod]
+        public void IndexViewLoads()
+        {
+            //Arrange
+
+            //Act
+            ViewResult result = controller.Index() as ViewResult;
+
+            //Assets
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void IndexReturnsBooks()
+        {
+            var actual = controller.Index().Model;
+        }
+
         public booksControllerTest()
         {
             //
@@ -58,12 +112,5 @@ namespace Bookshelf_assignment2.Tests.Controllers
         //
         #endregion
 
-        [TestMethod]
-        public void TestMethod1()
-        {
-            //
-            // TODO: Add test logic here
-            //
-        }
     }
 }

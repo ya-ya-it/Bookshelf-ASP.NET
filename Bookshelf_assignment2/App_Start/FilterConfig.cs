@@ -10,7 +10,8 @@ namespace Bookshelf_assignment2
             filters.Add(new HandleErrorAttribute());
 
             // force ssl
-            filters.Add(new RequireHttpsAttribute());
+            //My ssl is not working so Im testing on local mashine without it
+            //filters.Add(new RequireHttpsAttribute());
         }
     }
 }

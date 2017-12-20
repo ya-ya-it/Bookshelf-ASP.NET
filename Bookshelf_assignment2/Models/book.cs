@@ -7,7 +7,7 @@ namespace Assignment1.Models
     using System.Data.Entity.Spatial;
 
     [Table("book")]
-    public partial class Book
+    public partial class book
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

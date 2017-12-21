@@ -87,26 +87,139 @@ namespace Bookshelf_assignment2.Tests.Controllers
             Assert.AreEqual("Error", actual.ViewName);
         }
 
-        public booksControllerTest()
+        [TestMethod]
+        public void EditValidBook()
         {
+            var actual = (book)controller.Edit(1).Model;
+            Assert.AreEqual(books.ToList()[0], actual);
         }
 
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
+        [TestMethod]
+        public void EditInvalidNoId()
         {
-            get
+            int? id = null;
+            var actual = (ViewResult)controller.Edit(id);
+            Assert.AreEqual("Error", actual.ViewName);
+        }
+
+        [TestMethod]
+        public void EditBookInvalidId()
+        {
+            ViewResult result = controller.Edit(555) as ViewResult;
+            Assert.AreEqual("Error", result.ViewName);
+        }
+        
+        [TestMethod]
+        public void DeleteValidBook()
+        {        
+            var actual = (book)controller.Delete(1).Model;           
+            Assert.AreEqual(books.ToList()[0], actual);
+        }
+        
+        [TestMethod]
+        public void DeleteBookInvalidId()
+        {
+            int id = 12345;
+            ViewResult actual = (ViewResult)controller.Delete(id);
+            Assert.AreEqual("Error", actual.ViewName);
+        }
+
+        [TestMethod]
+        public void DeleteInvalidNoId()
+        {        
+            int? id = null;        
+            ViewResult actual = controller.Delete(id);  
+            Assert.AreEqual("Error", actual.ViewName);
+        }
+        
+        [TestMethod]
+        public void CreateViewLoads()
+        {
+            ViewResult actual = (ViewResult)controller.Create();
+            Assert.AreEqual("Create", actual.ViewName);
+            Assert.IsNotNull(actual.ViewBag.author_id);
+        }
+        
+        [TestMethod]
+        public void CreateValidBook()
+        {
+            book book = new book
             {
-                return testContextInstance;
-            }
-            set
+                book_id = 4,
+                title = "Book4",
+                author_id = 1,
+                year_published = 1994,
+                summary = "Book4"
+            };
+            RedirectToRouteResult actual = (RedirectToRouteResult)controller.Create(book);
+            Assert.AreEqual("Index", actual.RouteValues["action"]);
+        }
+
+        [TestMethod]
+        public void CreateInvalidBook()
+        {
+            controller.ModelState.AddModelError("key", "error message");
+
+            book book = new book
             {
-                testContextInstance = value;
-            }
+                book_id = 4,
+                title = "Book4",
+                author_id = 1,
+                year_published = 1994,
+                summary = "Book4"
+            };
+            ViewResult actual = (ViewResult)controller.Create(book);
+            Assert.AreEqual("Create", actual.ViewName);
+            Assert.IsNotNull(actual.ViewBag.author_id);
+        }
+        
+        [TestMethod]
+        public void EditValidBookPost()
+        {
+            book book = books.ToList()[0];
+            RedirectToRouteResult actual = (RedirectToRouteResult)controller.Edit(book);
+            Assert.AreEqual("Index", actual.RouteValues["action"]);
+        }
+
+        [TestMethod]
+        public void EditInvalidBookPost()
+        {
+            controller.ModelState.AddModelError("key", "error message");
+
+            book book = new book
+            {
+                book_id = 4,
+                title = "Book4",
+                author_id = 1,
+                year_published = 1994,
+                summary = "Book4"
+            };
+            ViewResult actual = (ViewResult)controller.Edit(book);
+            Assert.AreEqual("Edit", actual.ViewName);
+            Assert.IsNotNull(actual.ViewBag.author_id);
+        }
+        
+        [TestMethod]
+        public void DeleteConfirmedValidBook()
+        {
+            RedirectToRouteResult actual = (RedirectToRouteResult)controller.DeleteConfirmed(1);          
+            Assert.AreEqual("Index", actual.RouteValues["action"]);
+        }
+        
+        [TestMethod]
+        public void DeleteConfirmedBookInvalidId()
+        {
+            int id = 666333;
+            ViewResult actual = (ViewResult)controller.DeleteConfirmed(id);
+            Assert.AreEqual("Error", actual.ViewName);
+        }
+
+        [TestMethod]
+        public void DeleteConfirmedBookInvalidNoId()
+        {         
+            int? id = null; 
+            ViewResult actual = (ViewResult)controller.DeleteConfirmed(id);        
+            Assert.AreEqual("Error", actual.ViewName);
         }
 
         #region Additional test attributes

@@ -57,7 +57,7 @@ namespace Assignment1.Controllers
         public ActionResult Create()
         {
             ViewBag.author_id = new SelectList(db.authors, "author_id", "last_name");
-            return View();
+            return View("Create");
         }
 
         // POST: books/Create
@@ -74,20 +74,20 @@ namespace Assignment1.Controllers
             }
 
             ViewBag.author_id = new SelectList(db.authors, "author_id", "last_name", book.author_id);
-            return View(book);
+            return View("Create", book);
         }
 
         // GET: books/Edit/5
-        public ActionResult Edit(int? id)
+        public ViewResult Edit(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("Error");
             }
             book book = db.books.SingleOrDefault(b => b.book_id == id);
             if (book == null)
             {
-                return HttpNotFound();
+                return View("Error");
             }
             ViewBag.author_id = new SelectList(db.authors, "author_id", "last_name", book.author_id);
             return View(book);
@@ -106,30 +106,38 @@ namespace Assignment1.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.author_id = new SelectList(db.authors, "author_id", "last_name", book.author_id);
-            return View(book);
+            return View("Edit", book);
         }
 
         // GET: books/Delete/5
-        public ActionResult Delete(int? id)
+        public ViewResult Delete(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("Error");
             }
             book book = db.books.SingleOrDefault(b => b.book_id == id);
             if (book == null)
             {
-                return HttpNotFound();
+                return View("Error");
             }
-            return View(book);
+            return View("Delete", book);
         }
 
         // POST: books/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
+            if (id == null)
+            {
+                return View("Error");
+            }
             book book = db.books.SingleOrDefault(b => b.book_id == id);
+            if (book == null)
+            {
+                return View("Error");
+            }
             db.Delete(book);
             return RedirectToAction("Index");
         }
